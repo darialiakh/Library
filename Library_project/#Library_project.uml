@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DjangoModelDependency</ID>
+  <OriginalElement>#Library_project</OriginalElement>
+  <nodes>
+    <node x="66.75" y="523.0">django.contrib.auth.models.User</node>
+    <node x="49.25" y="0.0">django.contrib.auth.models.Permission</node>
+    <node x="293.75" y="358.0">library.models.Book</node>
+    <node x="323.75" y="212.0">library.models.Genre</node>
+    <node x="175.75" y="790.0">library.models.Comments</node>
+    <node x="0.0" y="190.0">django.contrib.auth.models.Group</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="library.models.Comments" target="django.contrib.auth.models.User">
+      <point x="-54.75" y="-59.0" />
+      <point x="230.5" y="765.0" />
+      <point x="170.25" y="765.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="django.contrib.auth.models.User" target="django.contrib.auth.models.Group">
+      <point x="-51.75" y="-26.0" />
+      <point x="118.5" y="333.0" />
+      <point x="110.0" y="333.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="library.models.Comments" target="library.models.Book">
+      <point x="54.75" y="-59.0" />
+      <point x="340.0" y="765.0" />
+      <point x="400.25" y="765.0" />
+      <point x="0.0" y="191.0" />
+    </edge>
+    <edge source="library.models.Book" target="library.models.Genre">
+      <point x="0.0" y="-191.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="django.contrib.auth.models.User" target="django.contrib.auth.models.Permission">
+      <point x="51.75" y="-26.0" />
+      <point x="222.0" y="333.0" />
+      <point x="230.5" y="333.0" />
+      <point x="60.5" y="70.0" />
+    </edge>
+    <edge source="django.contrib.auth.models.Group" target="django.contrib.auth.models.Permission">
+      <point x="0.0" y="-59.0" />
+      <point x="-60.5" y="70.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="226.5" y="195.49999999999997" />
+  <SelectedNodes>
+    <node>django.contrib.auth.models.Group</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+</Diagram>
+

@@ -1,0 +1,246 @@
+{% extends 'library/../base.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ book.book_title }}
+{% endblock %}
+
+{% block content %}
+     <style>
+    body {
+    padding-top: 5rem;
+    background-color: #F5F5F5;
+}
+    .block3
+    {
+				padding: 10px;
+				margin: auto;
+				background: white;
+    }
+    .block2
+    {
+        width: 55vw;
+				padding: 10px;
+				margin: auto;
+    }
+     .block5 {
+         padding: 10px;
+				margin: auto;
+				background: white;
+     }
+    </style>
+    <style>
+   h1 {
+    text-indent: 10px; /* Отступ первой строки в пикселах */
+       font-size: 16px;
+       font-family: RobotoBold;
+    border-bottom: 1px solid #e4e4e4;
+   }
+.desc1 {
+    color: #666;
+    font-size: 10px;
+    padding-left: 12px;
+}
+.desc2 {
+    font-size: 10px;
+    color: #444;
+    font-family: Roboto,Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+    text-decoration: none;
+}
+.large-offset-1 {
+    margin-left: 8.33333% !important; }
+.large-8 {
+    width: 66.66667%; }
+.columns {
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  width: 100%;
+  float: left; }
+table{
+    border-color: transparent;
+}
+    .lt35 {
+    font-family: RobotoBold;
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 10px;
+    float: left;
+        color: black;
+}
+  </style>
+ <div class="block2">
+        <br>
+        <br>
+        <br>
+            <font size="5" color="black"><b><a href="{% url 'list' %}">Все книги</a>/&nbsp;{{ book.book_title }}</b></font>
+        <hr>
+        <div class="block3">
+
+        <table>
+    <tr>
+    <td rowspan="7">
+        <div class="image">
+             {% if book.book_image %}
+                <p> <img src="{{MEDIA_URL}}{{ book.book_image.url}}" height="500"></p>
+             {% endif %}
+        </div>
+    </td>
+
+<td>
+    <h1>{{ book.book_title }}</h1>
+    </td>
+
+        </tr>
+<tr>
+    <td>
+        <h2><span class="desc1">Автор: </span><span class="desc2">{{ book.book_author }}</span></h2>
+            </td>
+    <td>
+        <h2><span class="desc1">Язык книги: </span><span class="desc2">{{ book.book_lang }}</span></h2>
+    </td>
+</tr>
+        <tr>
+    <td>
+               <h2><span class="desc1">Жанр: </span><span class="desc2">{{ book.book_genre }}</span></h2>
+
+</td>
+            <td>
+                        <h2><span class="desc1">Язык оригинальной книги: </span><span class="desc2">{{ book.book_lang_origin }}</span></h2>
+
+            </td>
+        </tr>
+        <tr>
+    <td>
+                        <h2><span class="desc1">Год печати: </span><span class="desc2">{{ book.book_year }}</span></h2>
+
+        </td>
+            <td>
+                        <h2><span class="desc1">Переводчик(и): </span><span class="desc2">{{ book.book_trans }}</span></h2>
+            </td>
+        </tr>
+        <tr>
+
+        {% if user.username %}
+        <td> <h2><span class="desc1">Оценка: <a href="{% url 'add_like' book.id %}"><img src="{% static 'media/images/likes.png' %}" width="25px" height="25px"></a>{{ book.book_likes }} | <a href="{% url 'add_dislike' book.id %}"><img src="{% static 'media/images/dislike.jpg' %}" width="40px" height="25px"></a>{{ book.book_dislikes }}</span></h2>
+        </td>
+            {% else %}
+        <td><h2><span title="Чтоб оценивать, войдите в систему" class="desc1">Понравилось: </span><span class="desc2">{{ book.book_likes }} | </span><span class="desc1">Не понравилось: </span><span class="desc2">{{ book.book_dislikes }}</span></h2>    </td>
+
+        {% endif %}
+
+            <td>
+                        <h2><span class="desc1">Издатель: </span><span class="desc2">{{ book.book_publisher }}</span></h2>
+            </td>
+        </tr>
+        <tr>
+    <td>
+                        <h2><span class="desc1">Количество страниц: </span><span class="desc2">{{ book.book_pages }}</span></h2>
+
+        </td>
+            <td>
+                        <h2><span class="desc1">Город печати: </span><span class="desc2">{{ book.book_publisher_city }}</span></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+        {% if user.username %}
+        {% if book.book_text %}
+            <button type="submit" type="button" class="btn btn-outline-secondary">
+           <a href="{{MEDIA_URL}}{{ book.book_text.url}}" download>Download</a></button>
+        {% else %}
+            <p>Извините, текст данной книги отсутствует.</p>
+        {% endif %}
+        {% else %}
+            <p>Войдите, что бы оставить комментарии. <a href="{% url 'login' %}">Вход</a></p>
+        {% endif %}
+            </td>
+        </tr>
+ </table>
+        <p>{{ book.book_description }}</p>
+<br>
+        <br>
+            <br>
+
+
+
+<div ><h4>Комментарии:</h4>
+<div height="1" style="border-bottom: 1px dotted #000033; "></div>
+{% for comment in comments %}
+{{ comment.comments_text }}
+    <p align="right"> {{ comment.comments_author.username}} -{{comment.comments_date}}</p>
+<div height="1" style="border-bottom: 1px dotted #000033; "></div>
+{% endfor %}
+</div>
+    {% if user.username %} </div>
+        <div class="block5">
+    <form action="{% url 'addcomment' book.id %}" method="post">
+    {% csrf_token %}
+    <textarea name="comments_text" cols="90" rows="3" required="" id="id_comments_text"></textarea>
+
+    <input type="submit" value="Отправить комментарий" />
+</form></div>
+        {% else %}
+   <p>Войдите, что бы оставить комментарии. <a href="{% url 'login' %}">Вход</a></p>
+    {% endif %}
+     <br>
+
+{% endblock %}
+
+
+
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block title %}#}
+{#    {{ book.book_title }}#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#<div class="block">#}
+{#    <div class="info_book">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-6">#}
+{#                <div class="image">#}
+{#                    {% if book.book_image %}#}
+{#                        <p> <img src="{{MEDIA_URL}}{{ book.book_image.url}}"></p>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-lg-6">#}
+{#                <h1 class="text-center">{{ book.title }}</h1>#}
+{#                <p class="muted">Автор: <strong>{{ book.book_author }}</strong></p>#}
+{#                {% if user.username %}#}
+{#                    {% if book.book_text %}#}
+{#                            <button type="submit"> <a href="{{MEDIA_URL}}{{ book.book_text.url}}" download>Download</a></button>#}
+{#                    {% else %}#}
+{#                        <p>Sorry</p>#}
+{#                    {% endif %}#}
+{#                {% else %}#}
+{#                    <p>nooo</p>#}
+{#                {% endif %}#}
+{##}
+{##}
+{#    </div>#}
+{#              <p>Комментарии:</p>#}
+{#            <div height="1" style="border-bottom: 1px dotted #000033; "></div>#}
+{##}
+{#            {%  for comment in comments %}#}
+{#            <p>{{ comment.comments_text }}</p>#}
+{#            <p align="right"> {{ comment.comments_author.username}} -{{comment.comments_date}}</p>#}
+{#            <div height="1" style="border-bottom: 1px dotted #000033; "></div>#}
+{##}
+{#            {% endfor %}#}
+{##}
+        {#    {% if user.username %}#}
+{#            <form action="/list/book/addcomment/{{ book.id }}/" method="post">#}
+{#            {% csrf_token %}#}
+{#            {{ form }}#}
+{#            <input type="submit" class="button" value="Добавить комментарий">#}
+{#            </form>#}
+        {#    {% endif %}#}
+{##}
+{#    </div>#}
+{#    </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}

@@ -1,0 +1,118 @@
+{% extends 'library/../base.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ all_title }}{{ genre.genre }}
+{% endblock %}
+
+{% block content %}
+    <script src="{% static 'library/js/jquery.js' %}"></script>
+    <script src="{% static 'library/js/owl.carousel.min.js' %}"></script>
+    <style>
+    body {
+    padding-top: 5rem;
+    background-color: #F5F5F5;
+}
+    .block3
+    {
+				padding: 10px;
+				margin: auto;
+				background: white;
+    }
+    .block2
+    {
+        width: 55vw;
+				padding: 10px;
+				margin: auto;
+    }
+    </style>
+<style>
+   h1 {
+    text-indent: 10px; /* Отступ первой строки в пикселах */
+       font-size: 16px;
+       font-family: RobotoBold;
+    border-bottom: 1px solid #e4e4e4;
+   }
+.desc1 {
+    color: #666;
+    font-size: 13px;
+    padding-left: 12px;
+}
+.desc2 {
+    color: #000;
+    font-size: 13px;
+}
+table{
+    border-color: transparent;
+}
+  </style>
+
+<br>
+        <br>
+        <br>
+
+<table border="1" cellpadding="5" align="center">
+    <tr><h4 text-indent="300px">Популярные книги:</h4></tr>
+   <tr>
+       <td><img src="{% static 'media/images/BC4_1490534091.jpg' %}" width="100px"></td>
+    <td><img src="{% static 'media/images/BC4_1490775651.jpg' %}" width="100px"></td>
+        <td><img src="{% static 'media/images/Frensis_Skott_Fitsdzherald__Velikij_Getsbi.jpg' %}" width="100px"></td>
+    <td><img src="{% static 'media/images/BC4_1490775651.jpg' %}" width="100px"></td>
+         <td><img src="{% static 'media/images/BC4_1490511814.jpg' %}" width="100px"></td>
+    <td><img src="{% static 'media/images/BC4_1490771455.jpg' %}" width="100px"></td>
+  </tr>
+ </table>
+ <div class="block2">
+
+        <br>
+            <font size="5" color="black"><b>{{ title }}{{ genre.genre }}</b></font>
+        <hr>
+
+    {% for book in books %}
+<div class="block3">
+        <table>
+    <tr>
+    <td rowspan="6">
+        <div class="image">
+             {% if book.book_image %}
+                <p> <img src="{{MEDIA_URL}}{{ book.book_image.url}}" height="400"></p>
+             {% endif %}
+        </div>
+    </td>
+<td>
+    <h1><a href="{% url 'book' book.id %}">{{ book.book_title }}</a></h1>
+    </td>
+        </tr>
+<tr>
+    <td>
+        <h2><span class="desc1">Понравилось: </span><span class="desc2">{{ book.book_likes }} | </span><span class="desc1">Не понравилось: </span><span class="desc2">{{ book.book_dislikes }}</span></h2>    </td>
+</tr>
+        <tr>
+    <td>
+
+        <h2><span class="desc1">Автор: </span><span class="desc2">{{ book.book_author }}</span></h2>
+</td>
+        </tr>
+        <tr>
+    <td>
+        <h2><span class="desc1">Жанр: </span><span class="desc2">{{ book.book_genre }}</span></h2>
+        </td>
+        </tr>
+        <tr>
+    <td>
+        <h2><span class="desc1">Год: </span><span class="desc2">{{ book.book_year }}</span><span class="desc1"> | Язык книги: </span><span class="desc2">{{ book.book_lang }}</span><span class="desc1"> | Страниц: </span><span class="desc2">{{ book.book_pages }}</span></h2>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                 <p>{{ book.get_short_description }}...</p>
+            </td>
+        </tr>
+ </table>
+
+
+</div>
+        <br>
+
+{% endfor %}
+</div>
+{% endblock %}

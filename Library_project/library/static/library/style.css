@@ -1,0 +1,29 @@
+body {
+    padding-top: 5rem;
+    background-color: darkseagreen;
+}
+
+.base-content {
+    padding: 3rem 1.5rem;
+
+    height: auto;
+    width: 80%;
+}
+
+.info_book{
+    text-align: center;
+}
+.block1 {
+
+				width: 70vw;
+				padding: 10px;
+				margin: auto;
+				background: lightgrey;
+			}
+.block {
+
+				width: 70vw;
+				padding: 10px;
+				margin: auto;
+				background:burlywood;
+			}

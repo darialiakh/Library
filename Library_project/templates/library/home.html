@@ -1,0 +1,198 @@
+{% extends 'library/../base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Главная
+{% endblock %}
+
+{% block content %}
+
+    <style>
+    body {
+	margin: 0;
+	padding: 0;
+}
+.carousel-items, .carousel-labels {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+}
+.carousel-item {
+	display: block;
+	float: left;
+}
+.carousel-wrapper {
+	width: 100%;
+	position: relative;
+	padding-bottom: 85vh;
+	background-color: #eee;
+	overflow: hidden;
+}
+.carousel-items {
+	width: 300%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	transition: left .5s ease-out;
+	-o-transition: left .5s ease-out;
+	-ms-transition: left .5s ease-out;
+	-moz-transition: left .5s ease-out;
+	-webkit-transition: left .5s ease-out;
+}
+.carousel-item {
+	width: 33.33333333%;
+	height: 100%;
+	color: white;
+}
+.carousel-item-blue {
+	background: url({% static 'media/images/fon.jpg' %});
+    background-size: 100%;
+}
+.carousel-item-red {
+	background: url({% static 'media/images/fon.jpg' %});
+    background-size: 100%;
+}
+.carousel-item-green {
+	background: url({% static 'media/images/fon.jpg' %});
+    background-size: 100%;
+}
+.carousel-labels {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	bottom: 0;
+	height: 20px;
+	width: 100%;
+	padding: 10px 0;
+	text-align: center;
+}
+.carousel-selector {
+	display: none;
+}
+.carousel-label {
+	display: inline-block;
+}
+.carousel-label label {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: white;
+	display: block;
+	cursor: pointer;
+}
+#slide1:checked ~ .carousel-items {
+	left: 0;
+}
+#slide1:checked ~ .carousel-labels .carousel-label:nth-child(1) label {
+	background-color: black;
+}
+#slide2:checked ~ .carousel-items {
+	left: -100%;
+}
+#slide2:checked ~ .carousel-labels .carousel-label:nth-child(2) label {
+	background-color: black;
+}
+#slide3:checked ~ .carousel-items {
+	left: -200%;
+}
+#slide3:checked ~ .carousel-labels .carousel-label:nth-child(3) label {
+	background-color: black;
+}
+   @font-face {
+    font-family: lyrica; /* Имя шрифта */
+    src: url({% static 'media/fonts/lyrica.ttf' %}); /* Путь к файлу со шрифтом */
+   }
+   P {
+       font-family: lyrica;
+       font-size: 40pt;
+       color: darkred;
+   }
+    .block {
+        margin-top: 10px;
+        margin-right: 150px;
+        margin-left: 100px;
+    }
+    </style>
+    <style>
+     .block2
+    {
+        width: 70vw;
+				margin: auto;
+    }</style>
+    <style>
+    body {
+    background-color: #F5F5F5;
+}
+    </style>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="block2">
+    <div class="carousel-wrapper">
+	<input type="radio" checked="checked" id="slide1" class="carousel-selector" name="carousel-selector" />
+	<input type="radio" id="slide2" class="carousel-selector" name="carousel-selector" />
+	<input type="radio" id="slide3" class="carousel-selector" name="carousel-selector" />
+
+	<ul class="carousel-items">
+
+		<li class="carousel-item carousel-item-blue"><div class="block">
+        <br>
+<br>
+
+         {% if user.username %}
+            <p align="center">Добро Пожаловать, {{ user.username }}</p>
+        {% else %}
+             <p align="center">Добро Пожаловать!</p>
+        {% endif %}
+
+        <br>
+        <br>
+        <br>
+            <p align="center"><font color="white" size="9">Есть преступления хуже, чем сжигать книги. Например — не читать их.</font></p>
+ <p align="center"><font color="maroon" size="6">Рэй Брэдбери «451 градус по Фаренгейту»</font></p>
+        <br>
+        <br>
+        <br>
+            {% if user.username %}
+            <a href="{% url 'logout' %}" class="btn btn-link" ></a>
+        {% else %}
+                <p align="center"> <a href="{% url 'login' %}"  >Войдите</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <a href="{% url 'register' %}" >Зарегистрируйтесь</a></p>
+        {% endif %}
+		</div></li>
+
+		<li class="carousel-item carousel-item-red"><div class="block">
+             <br>
+        <br>
+        <br>
+           <p align="center"><font color="white" size="9">А что подумал по этому поводу Кролик, никто так и не узнал, потому что Кролик был очень воспитанный.</font></p>
+             <p align="center"><font color="maroon" size="6">Алан Александр Милн «Винни-Пух и все-все-все»</font></p>
+		</div></li>
+
+		<li class="carousel-item carousel-item-green"><div class="block">
+             <br>
+        <br>
+        <br>
+ <p align="center"><font color="white" size="9">Никогда и ничего не просите! Никогда и ничего, и в особенности у тех, кто сильнее вас. Сами предложат и сами все дадут!</font></p>
+ <p align="center"><font color="maroon" size="6">Михаил Булгаков «Мастер и Маргарита»</font></p>
+		</div></li>
+	</ul>
+
+	<ul class="carousel-labels">
+		<li class="carousel-label">
+			<label for="slide1"></label>
+		</li>
+		<li class="carousel-label">
+			<label for="slide2"></label>
+		</li>
+		<li class="carousel-label">
+			<label for="slide3"></label>
+		</li>
+	</ul>
+</div>
+</div>
+{% endblock %}
