@@ -1,0 +1,15 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: helloworld
+  image: python
+  commands:
+  - echo hello
+  - echo world
+
+- name: ping
+  image: python
+  commands:
+  - ping -c 3 8.8.8.8
